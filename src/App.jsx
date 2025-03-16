@@ -25,7 +25,9 @@ function App() {
       <Header />
       <main>
         <ConfigureCounter onSet={handleSetCount}/>
-        <Counter initialCount={chosenCount} />
+        {/* kalo kasusnya gini, setiap component punya statenya sendiri */}
+        <Counter key={chosenCount} initialCount={chosenCount} />
+        <Counter initialCount={0} />
       </main>
     </>
   );
