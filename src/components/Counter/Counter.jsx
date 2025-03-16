@@ -1,4 +1,4 @@
-import { useState, memo, useCallback } from 'react';
+import { useState, memo, useCallback, useMemo } from 'react';
 
 import IconButton from '../UI/IconButton.jsx';
 import MinusIcon from '../UI/Icons/MinusIcon.jsx';
@@ -41,7 +41,11 @@ No 2 dan 3 -> bakal lakuin pengecekan yang gaperlu
 */
 const Counter = memo(function Counter({ initialCount }) {
   log('<Counter /> rendered', 1);
-  const initialCountIsPrime = isPrime(initialCount);
+
+  // memo itu buat component, useMemo buat function dalem component
+  // useMemo bandingin initialCount sama apa beda, kalo beda baru dia execute, mirip useCallback
+  // dia cek hasil isPrime(initialCount) sama ga kayak initialCount, kalo iya baru execute
+  const initialCountIsPrime = useMemo(() => isPrime(initialCount), [initialCount]);
 
   const [counter, setCounter] = useState(initialCount);
 
